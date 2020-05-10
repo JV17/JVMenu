@@ -9,17 +9,8 @@
 Pod::Spec.new do |s|
   s.name             = 'JVMenu'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of JVMenu.'
-
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!
-
-  s.description      = <<-DESC
-TODO: Add long description of the pod here.
-                       DESC
+  s.summary          = 'A simple bottom/top drop-down/pop-up menu.'
+  s.description      = "This menu will try to mimic a custom action sheet coming either from the top of the view or the bottom of the view. Written in Swift."
 
   s.homepage         = 'https://github.com/JV17/JVMenu'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'

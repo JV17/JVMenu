@@ -1,0 +1,6 @@
+framework module JVMenu {
+  umbrella header "JVMenu-umbrella.h"
+
+  export *
+  module * { export * }
+}

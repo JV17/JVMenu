@@ -1,0 +1,22 @@
+{
+  "name": "JVMenu",
+  "version": "0.1.0",
+  "summary": "A short description of JVMenu.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/JV17/JVMenu",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "JV17": "jorge.valbuena@jorgedeveloper.com"
+  },
+  "source": {
+    "git": "https://github.com/JV17/JVMenu.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "JVMenu/Classes/**/*"
+}
