@@ -35,3 +35,15 @@ Carthage/Build
 # `pod install` in .travis.yml
 #
 # Pods/
+*.xcscheme
+Example/JVMenu.xcodeproj/xcshareddata/xcschemes/JVMenu-Example.xcscheme
+Example/Pods/Pods.xcodeproj/project.pbxproj
+Example/Pods/Target Support Files/JVMenu/JVMenu.debug.xcconfig
+Example/Pods/Target Support Files/JVMenu/JVMenu.release.xcconfig
+Example/Pods/Target Support Files/JVMenu/ResourceBundle-JVMenu-JVMenu-Info.plist
+Example/Pods/Target Support Files/Pods-JVMenu_Example/Pods-JVMenu_Example.release.xcconfig
+Example/Pods/Target Support Files/Pods-JVMenu_Tests/Pods-JVMenu_Tests.debug.xcconfig
+Example/Pods/Target Support Files/Pods-JVMenu_Tests/Pods-JVMenu_Tests.release.xcconfig
+Example/Pods/Target Support Files/Pods-JVMenu_Example/Pods-JVMenu_Example.debug.xcconfig
+Example/Pods/Target Support Files/JVMenu/JVMenu.release.xcconfig
+*.xcconfig

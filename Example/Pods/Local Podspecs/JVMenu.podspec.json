@@ -1,8 +1,8 @@
 {
   "name": "JVMenu",
   "version": "0.1.0",
-  "summary": "A short description of JVMenu.",
-  "description": "TODO: Add long description of the pod here.",
+  "summary": "A simple bottom/top drop-down/pop-up menu.",
+  "description": "This menu will try to mimic a custom action sheet coming either from the top of the view or the bottom of the view. Written in Swift.",
   "homepage": "https://github.com/JV17/JVMenu",
   "license": {
     "type": "MIT",
@@ -15,8 +15,17 @@
     "git": "https://github.com/JV17/JVMenu.git",
     "tag": "0.1.0"
   },
+  "social_media_url": "https://twitter.com/jvdev17",
+  "swift_versions": "5.0",
   "platforms": {
-    "ios": "8.0"
+    "ios": "13.4"
   },
-  "source_files": "JVMenu/Classes/**/*"
+  "source_files": "JVMenu/Classes/**/*.{swift}",
+  "ios": {
+    "frameworks": [
+      "UIKit",
+      "Foundation"
+    ]
+  },
+  "swift_version": "5.0"
 }
