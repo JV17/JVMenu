@@ -53,6 +53,7 @@ public class JVMenuView: UIView {
         view.isUserInteractionEnabled = true
         view.alpha = 0.0
         view.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePan)))
+        view.addGestureRecognizer(UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe)))
         return view
     }()
         
@@ -135,6 +136,14 @@ public class JVMenuView: UIView {
     @objc private func handleTap(_ gestureRecognizer: UITapGestureRecognizer) {
         hide {
             self.removeFromSuperview()
+        }
+    }
+    
+    @objc private func handleSwipe(_ gestureRecognizer: UISwipeGestureRecognizer) {
+        if gestureRecognizer.direction == UISwipeGestureRecognizer.Direction.down {
+            hide {
+                self.removeFromSuperview()
+            }
         }
     }
     
