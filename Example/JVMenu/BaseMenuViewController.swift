@@ -19,12 +19,15 @@ class BaseMenuViewController: UIViewController {
     }
     
     @objc func menuTapped() {
+        // open the menu & close will happen automatically when a selection was made
         showMenu()
     }
 }
 
 extension BaseMenuViewController: JVMenuProtocol {
+    
     func selectedMenuItem(row: Int) {
+        // push or do any work based on menu selection...
         print(row)
     }
     

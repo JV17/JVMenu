@@ -12,7 +12,7 @@ public protocol JVMenuProtocol: JVMenuViewDelegate {
 
     /// Will provide all customization data for the menu.
     var data: JVMenuDataModel { get }
-    
+        
     /// Will display menu
     func showMenu()
     
@@ -39,7 +39,7 @@ public extension JVMenuProtocol {
             self.menuView.removeFromSuperview()
         }
     }
-    
+
     private var appWindow: UIWindow? {
         guard let window: UIWindow = UIApplication.shared.windows.filter({$0.isKeyWindow}).first else {
             print("Ops! Couldn't display the menu. No Window found!")

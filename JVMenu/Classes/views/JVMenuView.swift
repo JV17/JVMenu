@@ -7,7 +7,7 @@
 
 import UIKit
 
-public protocol JVMenuViewDelegate: class {
+public protocol JVMenuViewDelegate {
     /// This function will provide call back for the item selected in the menu.
     func selectedMenuItem(row: Int)
 }
@@ -26,7 +26,7 @@ public class JVMenuView: UIView {
         }
     }
     
-    public weak var delegate: JVMenuViewDelegate?
+    public var delegate: JVMenuViewDelegate?
     
     private struct Constants {
         static let offSetPercentage: CGFloat = 0.4
