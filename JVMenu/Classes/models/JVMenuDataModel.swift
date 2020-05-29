@@ -11,7 +11,8 @@ import Foundation
 public struct JVMenuDataModel {
     public var items: [JVMenuItem]
     public var backgroundColor: UIColor = UIColor(rgb: 0x3D3D3D)
-    public var dropDown: Bool = false
+    // TODO: drop down logic
+//    public var dropDown: Bool = false
     public var rowHeight: CGFloat = 50
     public var font: UIFont = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.bold)
     public var textColor: UIColor = UIColor.white
