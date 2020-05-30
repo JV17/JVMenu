@@ -34,12 +34,15 @@ public class JVMenuView: UIView {
         static let animationInterval: TimeInterval = 0.3
     }
     
+    private var isDragging: Bool = false
+        
     private lazy var shadowView: UIView = {
         let view: UIView = UIView(frame: shadowViewFrame)
         view.backgroundColor = UIColor.black.withAlphaComponent(0.6)
         view.isUserInteractionEnabled = true
         view.alpha = 0.0
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        view.addGestureRecognizer(tap)
         return view
     }()
     
@@ -47,13 +50,16 @@ public class JVMenuView: UIView {
         return CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height)
     }
         
-    private lazy var continerView: JVMenuContainerView = {
+    private lazy var containerView: JVMenuContainerView = {
         let view: JVMenuContainerView = JVMenuContainerView(frame: shownContainerViewFrame, data: data!)
         view.delegate = self
         view.isUserInteractionEnabled = true
         view.alpha = 0.0
-        view.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePan)))
-        view.addGestureRecognizer(UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe)))
+        let pan = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
+        pan.cancelsTouchesInView = false
+        view.addGestureRecognizer(pan)
+        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe))
+        view.addGestureRecognizer(swipe)
         return view
     }()
         
@@ -73,13 +79,14 @@ public class JVMenuView: UIView {
     @objc private func handlePan(_ gestureRecognizer: UIPanGestureRecognizer) {
         // return if animating
         if isPanGestureAnimating { return }
+        isDragging = true
         
         // reset container if gesture state is cancelled, ended or failed
         if gestureRecognizer.state == .cancelled || gestureRecognizer.state == .ended || gestureRecognizer.state == .failed {
             resetContainerStateAnimated()
         } else {
             // getting point and setting up new frame for the container
-            let translationY = gestureRecognizer.translation(in: continerView).y
+            let translationY = gestureRecognizer.translation(in: containerView).y
             let positiveTranslationY = abs(translationY)
             var containerFrame: CGRect = shownContainerViewFrame
             let newOriginY: CGFloat = containerFrame.origin.y+translationY
@@ -88,21 +95,18 @@ public class JVMenuView: UIView {
             
             // check if the container has been slide up (max to -60 points)
             if translationY > -60 && translationY <= 0 {
-                continerView.frame = rect
+                containerView.frame = rect
                 shadowView.alpha = 1
             } else if translationY > 0 {
                 // if container is sliding down update container frame accordingly
-                continerView.frame = rect
+                containerView.frame = rect
                 let newAlpha: CGFloat = 100/translationY // this will perform the alpha fade based on percentage
                 shadowView.alpha = newAlpha
                 
                 // if we reach half way down then dismiss animated
                 if translationY > (containerFrame.height/2) {
                     isPanGestureAnimating = true
-                    hide {
-                        self.isPanGestureAnimating = false
-                        self.removeFromSuperview()
-                    }
+                    internalHide()
                 }
             } else {
                 // else we set the new frame and reset the state
@@ -115,35 +119,33 @@ public class JVMenuView: UIView {
     private func resetContainerStateAnimated() {
         isPanGestureAnimating = true
         UIView.animate(withDuration: Constants.animationInterval, animations: {
-            self.continerView.frame = self.shownContainerViewFrame
+            self.containerView.frame = self.shownContainerViewFrame
             self.shadowView.alpha = 1
         }) { (finished) in
             self.isPanGestureAnimating = false
+            self.isDragging = false
         }
     }
     
     private func resetContainerStateAnimated(_ newFrame: CGRect) {
         isPanGestureAnimating = true
         UIView.animate(withDuration: Constants.animationInterval, animations: {
-            self.continerView.frame = newFrame
+            self.containerView.frame = newFrame
             self.shadowView.alpha = 1
         }) { (finished) in
-            self.continerView.frame = self.shownContainerViewFrame
+            self.containerView.frame = self.shownContainerViewFrame
             self.isPanGestureAnimating = false
+            self.isDragging = false
         }
     }
     
     @objc private func handleTap(_ gestureRecognizer: UITapGestureRecognizer) {
-        hide {
-            self.removeFromSuperview()
-        }
+        internalHide()
     }
     
     @objc private func handleSwipe(_ gestureRecognizer: UISwipeGestureRecognizer) {
         if gestureRecognizer.direction == UISwipeGestureRecognizer.Direction.down {
-            hide {
-                self.removeFromSuperview()
-            }
+            internalHide()
         }
     }
     
@@ -157,21 +159,22 @@ public class JVMenuView: UIView {
     
     public override func layoutSubviews() {
         super.layoutSubviews()
-        continerView.jvmenu_roundCorners(corners: [.topLeft, .topRight], radius: 10.0)
+        containerView.roundCorners(corners: [.topLeft, .topRight], radius: 10.0)
     }
     
     private func setupView() {
         addSubview(shadowView)
-        addSubview(continerView)
+        addSubview(containerView)
     }
     
     public func show() {
-        continerView.frame = hiddenContainerViewFrame
-        continerView.isHidden = false
+        isHidden = false
+        containerView.frame = hiddenContainerViewFrame
+        containerView.isHidden = false
         shadowView.isHidden = false
         UIView.animate(withDuration: Constants.animationInterval, animations: {
-            self.continerView.frame = self.shownContainerViewFrame
-            self.continerView.alpha = 1
+            self.containerView.frame = self.shownContainerViewFrame
+            self.containerView.alpha = 1
             self.shadowView.alpha = 1
         }) { (finished) in
         }
@@ -179,33 +182,31 @@ public class JVMenuView: UIView {
     
     public func hide(completion: @escaping () -> Void) {
         UIView.animate(withDuration: Constants.animationInterval, animations: {
-            self.continerView.frame = self.hiddenContainerViewFrame
-            self.continerView.alpha = 0
+            self.containerView.frame = self.hiddenContainerViewFrame
+            self.containerView.alpha = 0
             self.shadowView.alpha = 0
         }) { (finished) in
-            self.continerView.isHidden = true
+            self.containerView.isHidden = true
             self.shadowView.isHidden = true
             completion()
+        }
+    }
+    
+    private func internalHide() {
+        hide { [weak self] in
+            self?.isPanGestureAnimating = false
+            self?.isDragging = false
+            self?.isHidden = true
         }
     }
 }
 
 extension JVMenuView: JVMenuContainerViewDelegate {
     func selectedItemAt(row: Int) {
+        if isDragging { return }
         if delegate != nil {
-            delegate?.selectedMenuItem(row: row)
-            hide {
-                self.removeFromSuperview()
-            }
+            delegate!.selectedMenuItem(row: row)
+            internalHide()
         }
-    }
-}
-
-extension UIView {
-   func jvmenu_roundCorners(corners: UIRectCorner, radius: CGFloat) {
-        let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
-        let mask = CAShapeLayer()
-        mask.path = path.cgPath
-        layer.mask = mask
     }
 }

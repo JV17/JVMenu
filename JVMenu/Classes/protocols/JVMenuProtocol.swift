@@ -29,8 +29,11 @@ public extension JVMenuProtocol {
         if menuView.data == nil {
             menuView.data = data
         }
-    
-        window.addSubview(menuView)
+
+        if menuView.window == nil {
+            window.addSubview(menuView)
+        }
+
         menuView.show()
     }
     
@@ -49,7 +52,9 @@ public extension JVMenuProtocol {
     }
     
     private var menuView: JVMenuView {
-        JVMenuView.shared.delegate = self
+        if JVMenuView.shared.delegate == nil {
+            JVMenuView.shared.delegate = self
+        }
         return JVMenuView.shared
     }
 }

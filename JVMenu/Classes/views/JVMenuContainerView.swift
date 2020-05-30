@@ -7,7 +7,7 @@ protocol JVMenuContainerViewDelegate: class {
 class JVMenuContainerView: UIView {
     
     private let cellIdentifier: String = "JVMenuViewCellIdentifier"
-    private let padding: CGFloat = 6.0
+    private let padding: CGFloat = 8.0
     private let dashWidth: CGFloat = 30.0
     private let dashHeight: CGFloat = 4.0
 
@@ -30,6 +30,7 @@ class JVMenuContainerView: UIView {
         table.showsHorizontalScrollIndicator = false
         table.separatorColor = data?.separatorColor ?? UIColor.gray
         table.tableFooterView = UIView()
+        table.gestureRecognizers?.removeAll()
         return table
     }()
     
@@ -102,5 +103,14 @@ extension JVMenuContainerView: UITableViewDelegate, UITableViewDataSource {
         if delegate != nil {
             delegate?.selectedItemAt(row: indexPath.row)
         }
+    }
+}
+
+extension JVMenuContainerView {
+   func roundCorners(corners: UIRectCorner, radius: CGFloat) {
+        let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        let mask = CAShapeLayer()
+        mask.path = path.cgPath
+        layer.mask = mask
     }
 }
