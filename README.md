@@ -6,7 +6,7 @@ Simple iOS Menu written in Swift. Currently only supports portrait mode, might l
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
-(Resources/demo-screen.gif)
+![screenshot-1](Resources/demo-screen.gif)
 
 ## Usage
 
