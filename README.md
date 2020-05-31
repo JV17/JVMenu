@@ -6,8 +6,7 @@ Simple iOS Menu written in Swift. Currently only supports portrait mode, might l
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
-<!--![screenshot-1](Resources/demo-screen.gif)-->
-<img src="https://github.com/JV17/JVMenu/blob/master/Resources/demo-screen.gif" width="300">
+<img src="https://github.com/JV17/JVMenu/blob/master/Resources/screenshot-1.png" width="300"> <img src="https://github.com/JV17/JVMenu/blob/master/Resources/demo-screen.gif" width="300">
 
 ## Usage
 
