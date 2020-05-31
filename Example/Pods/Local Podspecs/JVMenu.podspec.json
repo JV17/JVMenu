@@ -1,9 +1,10 @@
 {
   "name": "JVMenu",
   "version": "0.1.0",
-  "summary": "A simple bottom/top drop-down/pop-up menu.",
+  "summary": "A simple bottom menu.",
   "description": "This menu will try to mimic a custom action sheet coming either from the top of the view or the bottom of the view. Written in Swift.",
   "homepage": "https://github.com/JV17/JVMenu",
+  "screenshots": "https://github.com/JV17/JVMenu/blob/master/Resources/demo-screen.gif",
   "license": {
     "type": "MIT",
     "file": "LICENSE"

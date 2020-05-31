@@ -9,10 +9,10 @@
 Pod::Spec.new do |s|
   s.name             = 'JVMenu'
   s.version          = '0.1.0'
-  s.summary          = 'A simple bottom/top drop-down/pop-up menu.'
+  s.summary          = 'A simple bottom menu.'
   s.description      = 'This menu will try to mimic a custom action sheet coming either from the top of the view or the bottom of the view. Written in Swift.'
   s.homepage         = 'https://github.com/JV17/JVMenu'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
+  s.screenshots     = 'https://github.com/JV17/JVMenu/blob/master/Resources/demo-screen.gif'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'JV17' => 'jorge.valbuena@jorgedeveloper.com' }
   s.source           = { :git => 'https://github.com/JV17/JVMenu.git', :tag => s.version.to_s }
