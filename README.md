@@ -6,6 +6,8 @@ Simple iOS Menu written in Swift. Currently only supports portrait mode, might l
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
+(Resources/demo-screen.gif)
+
 ## Usage
 
 You can make any of your objects to conform to the **JVMenuProtocol** like shown in the **BaseMenuViewController**. Then, you will simply will need to conform the protocol functions. 
